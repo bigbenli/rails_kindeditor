@@ -15,7 +15,7 @@ class Kindeditor::AssetUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  storage :sftp
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -72,7 +72,7 @@ class Kindeditor::AssetUploader < CarrierWave::Uploader::Base
   def filename
     if original_filename 
       @name ||= Digest::MD5.hexdigest(File.dirname(current_path)).slice(0, 12)
-      "#{@name}.#{file.extension}"
+      "#{Time.now.year}/description/#{@name}.#{file.extension}"
     end
   end
   
